@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>CrAwareLexerSimulator.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>///////////////////////////////////////////////////////////////////////////////////////////////</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// checkstyle: Checks Java source code and other text files for adherence to a set of rules.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Copyright (C) 2001-2022 the original author or authors.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// This library is free software; you can redistribute it and/or</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// modify it under the terms of the GNU Lesser General Public</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// License as published by the Free Software Foundation; either</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// version 2.1 of the License, or (at your option) any later version.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// This library is distributed in the hope that it will be useful,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Lesser General Public License for more details.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// You should have received a copy of the GNU Lesser General Public</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// License along with this library; if not, write to the Free Software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>///////////////////////////////////////////////////////////////////////////////////////////////</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.puppycrawl.tools.checkstyle.grammar;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.antlr.v4.runtime.CharStream;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.antlr.v4.runtime.Lexer;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.antlr.v4.runtime.atn.ATN;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.antlr.v4.runtime.atn.LexerATNSimulator;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.antlr.v4.runtime.atn.PredictionContextCache;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.antlr.v4.runtime.dfa.DFA;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Extends the LexerATNSimulator class in order to override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * the &#39;consume()&#39; method so that we can handle &#39;\r&#39; line</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * endings (pre-OSX macOS line endings) correctly in the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * ANTLR lexer.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class CrAwareLexerSimulator extends LexerATNSimulator {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Constructs a CrAwareLexerSimulator to interpret the input</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * from the lexer.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param lexer the current lexer</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param augmented the augmented transition network</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param decisionToDfa the DFA to store our states in</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param sharedContextCache cache of PredictionContext objects</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public CrAwareLexerSimulator(Lexer lexer, ATN augmented,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                                 DFA[] decisionToDfa,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                                 PredictionContextCache sharedContextCache) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super(lexer, augmented, decisionToDfa, sharedContextCache);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Overrides the &#39;consume()&#39; method to add support for</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#39;\r&#39; (carriage return) line endings.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param input the Character stream of the file we are parsing</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void consume(CharStream input) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_60'/>
+60
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_60'>3</a>
+<span>
+1. consume : Substituted 1 with 0 &rarr; KILLED<br/>
+2. consume : removed call to org/antlr/v4/runtime/CharStream::LA &rarr; KILLED<br/>
+3. consume : replaced call to org/antlr/v4/runtime/CharStream::LA with argument &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        final int currentChar = input.LA(1);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_61'/>
+61
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_61'>4</a>
+<span>
+1. consume : Substituted 10 with 11 &rarr; KILLED<br/>
+2. consume : negated conditional &rarr; KILLED<br/>
+3. consume : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+4. consume : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (currentChar == &#39;\n&#39;) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_62'/>
+62
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_62'>3</a>
+<span>
+1. consume : Substituted 1 with 0 &rarr; KILLED<br/>
+2. consume : Replaced integer addition with subtraction &rarr; KILLED<br/>
+3. consume : Removed assignment to member variable line &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            line++;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_63'/>
+63
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_63'>2</a>
+<span>
+1. consume : Substituted 0 with 1 &rarr; KILLED<br/>
+2. consume : Removed assignment to member variable charPositionInLine &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            charPositionInLine = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_65'/>
+65
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_65'>4</a>
+<span>
+1. consume : Substituted 13 with 14 &rarr; KILLED<br/>
+2. consume : negated conditional &rarr; KILLED<br/>
+3. consume : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+4. consume : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        else if (currentChar == &#39;\r&#39;) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_66'/>
+66
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_66'>3</a>
+<span>
+1. consume : Substituted 2 with 3 &rarr; KILLED<br/>
+2. consume : removed call to org/antlr/v4/runtime/CharStream::LA &rarr; KILLED<br/>
+3. consume : replaced call to org/antlr/v4/runtime/CharStream::LA with argument &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            final int nextChar = input.LA(2);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_67'/>
+67
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_67'>4</a>
+<span>
+1. consume : Substituted 10 with 11 &rarr; KILLED<br/>
+2. consume : negated conditional &rarr; KILLED<br/>
+3. consume : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+4. consume : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if (nextChar != &#39;\n&#39;) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_68'/>
+68
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_68'>3</a>
+<span>
+1. consume : Substituted 1 with 0 &rarr; KILLED<br/>
+2. consume : Replaced integer addition with subtraction &rarr; KILLED<br/>
+3. consume : Removed assignment to member variable line &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                line++;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_69'/>
+69
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_69'>2</a>
+<span>
+1. consume : Substituted 0 with 1 &rarr; KILLED<br/>
+2. consume : Removed assignment to member variable charPositionInLine &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                charPositionInLine = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_73'/>
+73
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_73'>3</a>
+<span>
+1. consume : Substituted 1 with 0 &rarr; KILLED<br/>
+2. consume : Replaced integer addition with subtraction &rarr; KILLED<br/>
+3. consume : Removed assignment to member variable charPositionInLine &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            charPositionInLine++;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_75'/>
+75
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_75'>1</a>
+<span>
+1. consume : removed call to org/antlr/v4/runtime/CharStream::consume &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        input.consume();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@3e535338_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_60'>60</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_60'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Substituted 1 with 0 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> removed call to org/antlr/v4/runtime/CharStream::LA &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> replaced call to org/antlr/v4/runtime/CharStream::LA with argument &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Substituted 10 with 11 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_62'>62</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_62'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Substituted 1 with 0 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Removed assignment to member variable line &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_63'>63</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_63'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Substituted 0 with 1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Removed assignment to member variable charPositionInLine &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_65'>65</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_65'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> Substituted 13 with 14 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_66'>66</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_66'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testDosLineEndingAsNewlineMultiline()]</span></span> Substituted 2 with 3 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testDosLineEndingAsNewlineMultiline()]</span></span> removed call to org/antlr/v4/runtime/CharStream::LA &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testDosLineEndingAsNewlineMultiline()]</span></span> replaced call to org/antlr/v4/runtime/CharStream::LA with argument &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_67'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testDosLineEndingAsNewlineMultiline()]</span></span> Substituted 10 with 11 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testDosLineEndingAsNewlineMultiline()]</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_68'>68</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_68'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> Substituted 1 with 0 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> Removed assignment to member variable line &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_69'>69</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_69'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> Substituted 0 with 1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()]</span></span> Removed assignment to member variable charPositionInLine &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_73'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Substituted 1 with 0 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()]</span></span> Removed assignment to member variable charPositionInLine &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@3e535338_75'>75</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@3e535338_75'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consume<br/><b>Killed by : </b>none</span></span> removed call to org/antlr/v4/runtime/CharStream::consume &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+<li class='mutator'>CONSTRUCTOR_CALLS</li>
+<li class='mutator'>EMPTY_RETURNS</li>
+<li class='mutator'>EXPERIMENTAL_ARGUMENT_PROPAGATION</li>
+<li class='mutator'>EXPERIMENTAL_BIG_DECIMAL</li>
+<li class='mutator'>EXPERIMENTAL_BIG_INTEGER</li>
+<li class='mutator'>EXPERIMENTAL_MEMBER_VARIABLE</li>
+<li class='mutator'>EXPERIMENTAL_NAKED_RECEIVER</li>
+<li class='mutator'>EXPERIMENTAL_REMOVE_SWITCH_MUTATOR_[0-99]</li>
+<li class='mutator'>EXPERIMENTAL_RETURN_VALUES_MUTATOR</li>
+<li class='mutator'>EXPERIMENTAL_SWITCH</li>
+<li class='mutator'>FALSE_RETURNS</li>
+<li class='mutator'>INCREMENTS</li>
+<li class='mutator'>INLINE_CONSTS</li>
+<li class='mutator'>INVERT_NEGS</li>
+<li class='mutator'>MATH</li>
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+<li class='mutator'>NON_VOID_METHOD_CALLS</li>
+<li class='mutator'>NULL_RETURNS</li>
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_ELSE</li>
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_IF</li>
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_ELSE</li>
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_IF</li>
+<li class='mutator'>REMOVE_INCREMENTS</li>
+<li class='mutator'>RETURN_VALS</li>
+<li class='mutator'>TRUE_RETURNS</li>
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testVoidElements()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testNonTightRtcHtmlTag()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:oneSimpleHtmlTag()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testCdata()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:htmlComments()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:dollarInLink()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testTwoLinkTagsInRow()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testLeadingAsteriskAfterSeeTag()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:authorWithMailto()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testRpHtmlTag()] (17 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:leadingAsterisks()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:mixedCaseOfHtmlTags()] (4 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:seeReferenceWithFewNestedClasses()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testHtmlVoidElementWbr()] (15 ms)</li><li>com.puppycrawl.tools.checkstyle.CheckerTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.CheckerTest]/[method:testHaltOnException()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testSpaceBeforeDescriptionInBlockJavadocTags()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:fewWhiteSpacesAsSeparator()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testDosLineEndingAsNewlineMultiline()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.meta.MetadataGeneratorUtilTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.meta.MetadataGeneratorUtilTest]/[method:testMetadataFilesGenerationAllFiles(org.itsallcode.io.Capturable)] (13870 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testNonTightOptgroupHtmlTag()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testLinkToPackage()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:dotCharacterInCustomTags()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testHtmlVoidElementKeygen()] (15 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testLeadingAsterisksExtended()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testCrAsNewlineMultiline()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testNestingWithSingletonElement()] (21 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testRtHtmlTag()] (17 ms)</li><li>com.puppycrawl.tools.checkstyle.AuditEventDefaultFormatterTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.AuditEventDefaultFormatterTest]/[method:testCalculateBufferLength()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testParagraph()] (18 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:serial()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testHtmlVoidElementTrack()] (15 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testNonTightRtHtmlTag()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.filefilters.BeforeExecutionExclusionFileFilterTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.filefilters.BeforeExecutionExclusionFileFilterTest]/[method:testFileExclusion()] (13 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testOptgroupHtmlTag()] (18 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testClosedOtherTag()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testNewlineAndAsteriskInParameters()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:unclosedAndClosedParagraphs()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testHtmlVoidElementEmbed()] (15 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:allJavadocInlineTags()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testNonTightRbHtmlTag()] (11 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:paramWithGeneric()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testAsteriskInJavadocInlineTag()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:htmlTagsInParagraph()] (4 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testUppercaseInPackageName()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testHtmlVoidElementSource()] (15 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testRtcHtmlTag()] (17 ms)</li><li>com.puppycrawl.tools.checkstyle.CheckerTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.CheckerTest]/[method:testHaltOnExceptionOff()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:unclosedParagraphFollowedByJavadocTag()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:negativeNumberInAttribute()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testInlineCustomJavadocTag()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testSpaceBeforeDescriptionInInlineTags()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:customJavadocTags()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testAllStandardJavadocTags()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:linkInlineTags()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:listWithUnclosedItemInUnclosedParagraph()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.CheckerTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.CheckerTest]/[method:testClearLazyLoadCacheInDetailAST()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testAsteriskInLiteral()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testInnerBracesInCodeTag()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testJavadocWithCrAsNewline()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:docRootInheritDoc()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.CheckerTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.CheckerTest]/[method:testExceptionWithCache()] (12 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:textBeforeJavadocTags()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testRbHtmlTag()] (17 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:javadocTagDescriptionWithInlineTags()] (2 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testAttributeValueWithoutQuotes()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:since()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.grammar.javadoc.JavadocParseTreeTest]/[method:testNonTightRpHtmlTag()] (10 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.8.0
+
+</body>
+</html>
