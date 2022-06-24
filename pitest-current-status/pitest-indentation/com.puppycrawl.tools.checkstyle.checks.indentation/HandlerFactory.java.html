@@ -1,0 +1,3575 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>HandlerFactory.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>///////////////////////////////////////////////////////////////////////////////////////////////</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// checkstyle: Checks Java source code and other text files for adherence to a set of rules.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Copyright (C) 2001-2022 the original author or authors.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// This library is free software; you can redistribute it and/or</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// modify it under the terms of the GNU Lesser General Public</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// License as published by the Free Software Foundation; either</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// version 2.1 of the License, or (at your option) any later version.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// This library is distributed in the hope that it will be useful,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Lesser General Public License for more details.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// You should have received a copy of the GNU Lesser General Public</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// License along with this library; if not, write to the Free Software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>///////////////////////////////////////////////////////////////////////////////////////////////</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.puppycrawl.tools.checkstyle.checks.indentation;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.lang.reflect.Constructor;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.HashMap;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Map;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Set;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.puppycrawl.tools.checkstyle.api.DetailAST;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.puppycrawl.tools.checkstyle.api.TokenTypes;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.puppycrawl.tools.checkstyle.utils.CommonUtil;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Factory for handlers. Looks up constructor via reflection.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class HandlerFactory {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Registered handlers.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_40'/>
+40
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_40'>1</a>
+<span>
+1. &#60;init&#62; : removed call to java/util/HashMap::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    private final Map&#60;Integer, Constructor&#60;?&#62;&#62; typeHandlers = new HashMap&#60;&#62;();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** Cache for created method call handlers. */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_43'/>
+43
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_43'>1</a>
+<span>
+1. &#60;init&#62; : removed call to java/util/HashMap::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    private final Map&#60;DetailAST, AbstractExpressionHandler&#62; createdHandlers = new HashMap&#60;&#62;();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Creates a HandlerFactory.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @noinspection OverlyCoupledMethod</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public HandlerFactory() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_51'/>
+51
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_51'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.CASE_GROUP, CaseHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_52'/>
+52
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_52'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_SWITCH, SwitchHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_53'/>
+53
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_53'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.SLIST, SlistHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_54'/>
+54
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_54'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.PACKAGE_DEF, PackageDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_55'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_ELSE, ElseHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_56'/>
+56
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_56'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_IF, IfHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_57'/>
+57
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_57'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_TRY, TryHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_58'/>
+58
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_58'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_CATCH, CatchHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_59'/>
+59
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_59'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_FINALLY, FinallyHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_60'/>
+60
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_60'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_DO, DoWhileHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_61'/>
+61
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_61'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_WHILE, WhileHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_62'/>
+62
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_62'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_FOR, ForHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_63'/>
+63
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_63'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.METHOD_DEF, MethodDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_64'/>
+64
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_64'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.CTOR_DEF, MethodDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_65'/>
+65
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_65'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.CLASS_DEF, ClassDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_66'/>
+66
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_66'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.ENUM_DEF, ClassDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_67'/>
+67
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_67'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.OBJBLOCK, ObjectBlockHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_68'/>
+68
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_68'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.INTERFACE_DEF, ClassDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_69'/>
+69
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_69'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.IMPORT, ImportHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_70'/>
+70
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_70'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.ARRAY_INIT, ArrayInitHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_71'/>
+71
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_71'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.ANNOTATION_ARRAY_INIT, AnnotationArrayInitHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_72'/>
+72
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_72'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.METHOD_CALL, MethodCallHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_73'/>
+73
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_73'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.CTOR_CALL, MethodCallHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_74'/>
+74
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_74'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.SUPER_CTOR_CALL, MethodCallHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_75'/>
+75
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_75'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LABELED_STAT, LabelHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_76'/>
+76
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_76'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.STATIC_INIT, StaticInitHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_77'/>
+77
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_77'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.INSTANCE_INIT, SlistHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_78'/>
+78
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_78'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.VARIABLE_DEF, MemberDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_79'/>
+79
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_79'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_NEW, NewHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_80'/>
+80
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_80'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        register(TokenTypes.INDEX_OP, IndexHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_81'/>
+81
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_81'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_SYNCHRONIZED, SynchronizedHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_82'/>
+82
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_82'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LAMBDA, LambdaHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_83'/>
+83
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_83'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.ANNOTATION_DEF, ClassDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_84'/>
+84
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_84'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.ANNOTATION_FIELD_DEF, MethodDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_85'/>
+85
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_85'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.SWITCH_RULE, SwitchRuleHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_86'/>
+86
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_86'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.LITERAL_YIELD, YieldHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_87'/>
+87
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_87'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.RECORD_DEF, ClassDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_88'/>
+88
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_88'>1</a>
+<span>
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        register(TokenTypes.COMPACT_CTOR_DEF, MethodDefHandler.class);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Registers a handler.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param &#60;T&#62; type of the handler class object.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param type</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *                type from TokenTypes</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param handlerClass</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *                the handler to register</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_100'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private &#60;T&#62; void register(int type, Class&#60;T&#62; handlerClass) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_101'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        final Constructor&#60;T&#62; ctor = CommonUtil.getConstructor(handlerClass,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_102'/>
+102
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_102'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                IndentationCheck.class,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                // current AST</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_104'/>
+104
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_104'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                DetailAST.class,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_105'/>
+105
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_105'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                // parent</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_106'/>
+106
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_106'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                AbstractExpressionHandler.class</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_107'/>
+107
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_107'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        );</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_108'/>
+108
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_108'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        typeHandlers.put(type, ctor);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_109'/>
+109
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_109'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_110'/>
+110
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_110'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_111'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_112'/>
+112
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_112'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns true if this type (form TokenTypes) is handled.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_113'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_114'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param type type from TokenTypes</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_115'/>
+115
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_115'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return true if handler is registered, false otherwise</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_116'/>
+116
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_116'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_117'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean isHandledType(int type) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_118'/>
+118
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_118'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        final Set&#60;Integer&#62; typeSet = typeHandlers.keySet();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_119'/>
+119
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_119'>3</a>
+<span>
+1. isHandledType : replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED<br/>
+2. isHandledType : replaced boolean return with false for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::isHandledType &rarr; KILLED<br/>
+3. isHandledType : replaced boolean return with true for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::isHandledType &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return typeSet.contains(type);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_120'/>
+120
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_120'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_121'/>
+121
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_121'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_122'/>
+122
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_122'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_123'/>
+123
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_123'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Gets list of registered handler types.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_124'/>
+124
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_124'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_125'/>
+125
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_125'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return int[] of TokenType types</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_126'/>
+126
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_126'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_127'/>
+127
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_127'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int[] getHandledTypes() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_128'/>
+128
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_128'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        final Set&#60;Integer&#62; typeSet = typeHandlers.keySet();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_129'/>
+129
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_129'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        final int[] types = new int[typeSet.size()];</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_130'/>
+130
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_130'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int index = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_131'/>
+131
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_131'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        for (final Integer val : typeSet) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_132'/>
+132
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_132'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            types[index] = val;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_133'/>
+133
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_133'>1</a>
+<span>
+1. getHandledTypes : Changed increment from 1 to -1 &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            index++;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_134'/>
+134
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_134'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_135'/>
+135
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_135'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_136'/>
+136
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_136'>1</a>
+<span>
+1. getHandledTypes : mutated return of Object value for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::getHandledTypes to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return types;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_137'/>
+137
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_137'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_138'/>
+138
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_138'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_139'/>
+139
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_139'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_140'/>
+140
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_140'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Get the handler for an AST.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_141'/>
+141
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_141'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_142'/>
+142
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_142'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param indentCheck   the indentation check</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_143'/>
+143
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_143'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param ast           ast to handle</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_144'/>
+144
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_144'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param parent        the handler parent of this AST</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_145'/>
+145
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_145'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_146'/>
+146
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_146'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return the ExpressionHandler for ast</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_147'/>
+147
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_147'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_148'/>
+148
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_148'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public AbstractExpressionHandler getHandler(IndentationCheck indentCheck,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_149'/>
+149
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_149'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        DetailAST ast, AbstractExpressionHandler parent) {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_150'/>
+150
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_150'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        final AbstractExpressionHandler resultHandler;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_151'/>
+151
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_151'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        final AbstractExpressionHandler handler =</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_152'/>
+152
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_152'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            createdHandlers.get(ast);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_153'/>
+153
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_153'>1</a>
+<span>
+1. getHandler : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (handler != null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_154'/>
+154
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_154'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            resultHandler = handler;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_155'/>
+155
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_155'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_156'/>
+156
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_156'>1</a>
+<span>
+1. getHandler : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        else if (ast.getType() == TokenTypes.METHOD_CALL) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_157'/>
+157
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_157'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            resultHandler = createMethodCallHandler(indentCheck, ast, parent);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_158'/>
+158
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_158'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_159'/>
+159
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_159'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_160'/>
+160
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_160'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            final Constructor&#60;?&#62; handlerCtor = typeHandlers.get(ast.getType());</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_161'/>
+161
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_161'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            resultHandler = (AbstractExpressionHandler) CommonUtil.invokeConstructor(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_162'/>
+162
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_162'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                handlerCtor, indentCheck, ast, parent);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_163'/>
+163
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_163'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_164'/>
+164
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_164'>1</a>
+<span>
+1. getHandler : mutated return of Object value for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::getHandler to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return resultHandler;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_165'/>
+165
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_165'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_166'/>
+166
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_166'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_167'/>
+167
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_167'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_168'/>
+168
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_168'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Create new instance of handler for METHOD_CALL.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_169'/>
+169
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_169'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_170'/>
+170
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_170'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param indentCheck   the indentation check</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_171'/>
+171
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_171'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param ast           ast to handle</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_172'/>
+172
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_172'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param parent        the handler parent of this AST</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_173'/>
+173
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_173'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_174'/>
+174
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_174'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return new instance.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_175'/>
+175
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_175'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_176'/>
+176
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_176'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private AbstractExpressionHandler createMethodCallHandler(IndentationCheck indentCheck,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_177'/>
+177
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_177'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        DetailAST ast, AbstractExpressionHandler parent) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_178'/>
+178
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_178'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        DetailAST astNode = ast.getFirstChild();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_179'/>
+179
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_179'>1</a>
+<span>
+1. createMethodCallHandler : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        while (astNode.getType() == TokenTypes.DOT) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_180'/>
+180
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_180'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            astNode = astNode.getFirstChild();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_181'/>
+181
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_181'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_182'/>
+182
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_182'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        AbstractExpressionHandler theParent = parent;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_183'/>
+183
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_183'>1</a>
+<span>
+1. createMethodCallHandler : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (isHandledType(astNode.getType())) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_184'/>
+184
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_184'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            theParent = getHandler(indentCheck, astNode, theParent);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_185'/>
+185
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_185'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            createdHandlers.put(astNode, theParent);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_186'/>
+186
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_186'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_187'/>
+187
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_187'>2</a>
+<span>
+1. createMethodCallHandler : removed call to com/puppycrawl/tools/checkstyle/checks/indentation/MethodCallHandler::&#60;init&#62; &rarr; KILLED<br/>
+2. createMethodCallHandler : mutated return of Object value for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::createMethodCallHandler to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return new MethodCallHandler(indentCheck, ast, theParent);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_188'/>
+188
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_188'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_189'/>
+189
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_189'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_190'/>
+190
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_190'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** Clears cache of created handlers. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_191'/>
+191
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_191'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void clearCreatedHandlers() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_192'/>
+192
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_192'>1</a>
+<span>
+1. clearCreatedHandlers : removed call to java/util/Map::clear &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        createdHandlers.clear();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_193'/>
+193
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_193'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_194'/>
+194
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_194'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7e83309a_195'/>
+195
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_195'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_40'>40</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_40'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testThrowsIndentProperty()]</span></span> removed call to java/util/HashMap::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_43'>43</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_43'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSeparatedLineWithJustSpaces()]</span></span> removed call to java/util/HashMap::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_51'>51</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_51'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testCaseLevel()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_52'>52</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_52'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpressionNewLine()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_53'>53</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_53'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpressionCorrect()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_54'>54</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_54'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testPackageDeclaration2()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIfElseWithNoCurly()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_56'>56</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_56'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSynchronizedStatement()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_57'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidTryWithChecker()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_58'>58</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_58'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidTryWithChecker()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_59'>59</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_59'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidTryWithChecker()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_60'>60</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_60'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testDoWhileWithoutCurly()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testWhileWithNoCurly()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_62'>62</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_62'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidForWithChecker()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_63'>63</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_63'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationMethodParenthesisOnNewLine()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_64'>64</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_64'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:forbidOldStyle()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_65'>65</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_65'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationIncorrect()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_66'>66</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_66'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotations()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_67'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testNewKeyword()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_68'>68</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_68'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidInterfaceDefWithChecker()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_69'>69</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_69'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidImportIndent()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_70'>70</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_70'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidArrayInitTwoDimensional()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_71'>71</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_71'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testZeroAnnotationArrayInit()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_72'>72</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_72'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testMethodChaining()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_73'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testCtorCall()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_74'>74</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_74'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testCtorCall()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_75'>75</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_75'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidLabelWithWhileLoop()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_76'>76</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_76'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidBlockWithChecker()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_77'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidBlockWithChecker()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_78'>78</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_78'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationIncorrect()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_79'>79</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_79'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testNewKeyword()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_80'>80</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_80'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_81'>81</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_81'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSynchronizedStatement()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_82'>82</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_82'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpressionNewLine()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_83'>83</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_83'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationIncorrect()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_84'>84</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_84'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationAnnotationFieldDefinition()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_85'>85</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_85'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpressionCorrect()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_86'>86</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_86'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationYieldStatement()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_87'>87</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_87'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecords()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_88'>88</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_88'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecordsAndCompactCtors()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::register &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_119'>119</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_119'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isHandledType<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecords()]</span></span> replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isHandledType<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationMethodParenthesisOnNewLine1()]</span></span> replaced boolean return with false for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::isHandledType &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isHandledType<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecords()]</span></span> replaced boolean return with true for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::isHandledType &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_133'>133</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_133'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getHandledTypes<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testGetRequiredTokens()]</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_136'>136</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_136'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getHandledTypes<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testGetRequiredTokens()]</span></span> mutated return of Object value for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::getHandledTypes to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_153'>153</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_153'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getHandler<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSeparatedLineWithJustSpaces()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_156'>156</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_156'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getHandler<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSeparatedLineWithJustSpaces()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_164'>164</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_164'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getHandler<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSeparatedLineWithJustSpaces()]</span></span> mutated return of Object value for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::getHandler to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_179'>179</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_179'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createMethodCallHandler<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testEmptyArray()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_183'>183</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_183'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createMethodCallHandler<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecords()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_187'>187</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_187'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createMethodCallHandler<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecords()]</span></span> removed call to com/puppycrawl/tools/checkstyle/checks/indentation/MethodCallHandler::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>createMethodCallHandler<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecords()]</span></span> mutated return of Object value for com/puppycrawl/tools/checkstyle/checks/indentation/HandlerFactory::createMethodCallHandler to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7e83309a_192'>192</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7e83309a_192'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>clearCreatedHandlers<br/><b>Killed by : </b>none</span></span> removed call to java/util/Map::clear &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+<li class='mutator'>CONSTRUCTOR_CALLS</li>
+<li class='mutator'>FALSE_RETURNS</li>
+<li class='mutator'>INCREMENTS</li>
+<li class='mutator'>INVERT_NEGS</li>
+<li class='mutator'>MATH</li>
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+<li class='mutator'>RETURN_VALS</li>
+<li class='mutator'>TRUE_RETURNS</li>
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:test15Extensions()] (12 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidTryWithChecker()] (13 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSeparatedLineWithJustSpaces()] (4 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationAnnotationFieldDefinition()] (11 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidBlockWithChecker()] (10 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidArrayInit()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambda1()] (19 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidCommaWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testTryHandler()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnonymousClassInMethodWithCurlyOnNewLine()] (16 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testCtorCall()] (14 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testStrictCondition()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidNewKeywordWithForceStrictCondition()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testWhileWithNoCurly()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidWhileWithChecker()] (10 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationOddStyles()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testMultipleAnnotationsWithWrappedLines()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidSwitchWithChecker()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidArrayInitTwoDimensional()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSynchronizedStatement()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambda3()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidSwitchWithChecker()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testArrays()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testZeroAnnotationArrayInit()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidWhileWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpression()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationArrayInit()] (10 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidArrayInitWithChecker()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationLineBreakVariableDeclaration()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidLabel()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testTryResources()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheckTest]/[method:testCheckOnlyBlockComments()] (12 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testPackageDeclaration4()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpressionCorrect()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testNewHandler()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testGetRequiredTokens()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testTwoStatementsPerLine()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidImportIndent()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambda4()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testForWithNoCurly()] (13 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotations()] (11 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationDefinition()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testNewKeyword()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidForWithChecker()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testChainedMethodCalling()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecords()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testDifficultAnnotations()] (12 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testPackageDeclaration2()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationLongConcatenatedString()] (2237 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationIncorrect()] (14 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationArrayInitGoodCase()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testThrowsIndentProperty()] (3 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidForWithChecker()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testBraceAdjustment()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testOddAnnotations()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testMembers()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testTryResourcesStrict()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSeparatedStatements()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationArrayInitWithEmoji()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testDoWhileWithoutCurly()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testGetAcceptableTokens()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testMethodPrecedeByAnnotationsWithParameterOnSeparateLine()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnonymousClasses()] (14 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testClassesAndMethods()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAndroidStyle()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationRecordsAndCompactCtors()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationLineWrappedRecordDeclaration()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidInvalidAnonymousClass()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidNewKeywordWithForceStrictCondition()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambdaTrueForceStrictCondition()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInputAnnotationDefIndentationCheck()] (10 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidMethodWithChecker()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLabels()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidInterfaceDefWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidAssignWithChecker()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testTryHandler2()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testThrowsIndentationLevel()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidDoWhileWithChecker()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidArrayInitDefaultIndentWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnonClassesFromGuava()] (10 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidMethodWithChecker()] (12 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidIfWithChecker()] (11 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidIfWithChecker()] (13 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambda2()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidClassDefWithChecker()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testNewKeyword2()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationArrayInitTwo()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAlternativeGoogleStyleSwitchCaseAndEnums()] (15 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidClassDefWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambda5()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpressionDeclaration()] (12 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidTryWithChecker()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testArrayInitWithEmoji()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSwitchCustom()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testTryResourcesNotStrict()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testSynchronizedMethod()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testCaseLevel()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidBlockWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationYieldStatement()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInputAnnotationScopeIndentationCheck()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambdaOddConditions()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidAssignWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testZeroCaseLevel()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidArrayInitTwoDimensional()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testMethodCallLineWrap()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIfElseWithNoCurly()] (11 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testCorrectIfAndParameters()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidArrayInitWithTrueStrictCondition()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testChainedMethodWithBracketOnNewLine()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationArrayInitGoodCaseTwo()] (11 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnonymousClassInMethod()] (11 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidDoWhileWithChecker()] (14 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testThrowsIndentationLevel2()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testLambdaFalseForceStrictCondition()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationMethodParenthesisOnNewLine()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testEmptyArray()] (9 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidArrayInitWithChecker()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationMethodParenthesisOnNewLine1()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidDotWithChecker()] (22 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testAnnotationClosingParenthesisEndsInSameIndentationAsOpening()] (10 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:forbidOldStyle()] (13 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testTabs()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testPackageDeclaration3()] (4 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testInvalidLabelWithWhileLoop()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testPackageDeclaration()] (5 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testValidLabel()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationSwitchExpressionNewLine()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testMethodChaining()] (7 ms)</li><li>com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheckTest]/[method:testIndentationLevel()] (7 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.8.0
+
+</body>
+</html>
